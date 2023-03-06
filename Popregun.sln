@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Popregun", "Popregun\Popregun.csproj", "{0D016588-5D8F-4A14-99FD-F4827F0D53D5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D016588-5D8F-4A14-99FD-F4827F0D53D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D016588-5D8F-4A14-99FD-F4827F0D53D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D016588-5D8F-4A14-99FD-F4827F0D53D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D016588-5D8F-4A14-99FD-F4827F0D53D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD985FA2-AC64-4604-8E80-1619353BA4F0}
+	EndGlobalSection
+EndGlobal
