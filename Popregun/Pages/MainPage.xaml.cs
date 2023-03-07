@@ -24,5 +24,25 @@ namespace Popregun.Pages
 		{
 			InitializeComponent();
 		}
+
+		private void cbFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
+
+		private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
+
+		private void tbSearch_SelectionChanged(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void lvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
+		}
 	}
 }
