@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using Popregun.DataBase;
 
 namespace Popregun.Pages
 {
@@ -20,29 +22,103 @@ namespace Popregun.Pages
 	/// </summary>
 	public partial class MainPage : Page
 	{
+		public List<Agent> agents { get; set; }
+		public List<Agent> sagents { get; set; }
+		public List<AgentType> agentTypes { get; set; }
+		public int page = 0;
 		public MainPage()
 		{
 			InitializeComponent();
+			agents = BdConnection.connection.Agent.ToList();
+			agentTypes = BdConnection.connection.AgentType.ToList();
+			agentTypes.Insert(0, new AgentType() { ID = 0, Title = "Все типы" });
+			List<string> Sorting = new List<string>()
+			{
+				"Все",
+               "Наименование по возрастанию",
+               "Наименование по убыванию",
+               "Размер скидки по возрастанию",
+               "Размер скидки по убыванию",
+               "Приоритет по возрастанию",
+               "Приоритет по убыванию",
+            };
+			cbFiltr.ItemsSource= Sorting;
+			cbSort.ItemsSource = agentTypes;
+			cbSort.DisplayMemberPath = "Title";
+			if (lvMain.Items.Count > 10)
+			{
+                SetPageNumbers();
+            }
+			DataContext = this;
 		}
 
 		private void cbFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-
-		}
+            Filter();
+        }
 
 		private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-
-		}
+            Filter();
+        }
 
 		private void tbSearch_SelectionChanged(object sender, RoutedEventArgs e)
 		{
-
-		}
+            Filter();
+        }
 
 		private void lvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 
+		}
+		private void Filter(bool isFilterChanged = true)
+		{
+			if (isFilterChanged) { page = 0; }
+			sagents = BdConnection.connection.Agent.ToList();
+			if(cbSort.SelectedItem != null)
+			{
+				var selType = cbSort.SelectedItem as AgentType;
+				if(selType.ID != 0)
+				{
+					sagents = sagents.Where(x => x.AgentType== selType).ToList();
+				}
+			}
+
+			if(cbFiltr.SelectedItem != null)
+			{
+				if(cbFiltr.SelectedIndex == 1)
+				{
+					sagents = sagents.OrderBy(x=> x.Title).ToList();
+				}
+				else if (cbFiltr.SelectedIndex == 2)
+				{
+					sagents = sagents.OrderByDescending(x=> x.Title).ToList();
+				}
+				else if(cbFiltr.SelectedIndex==3)
+				{
+					sagents = sagents.OrderBy(x=> x.ProductSale).ToList();
+				}
+				else if(cbFiltr.SelectedIndex == 4)
+				{
+					sagents =sagents.OrderByDescending(x=> x.ProductSale).ToList();
+				}
+				else if(cbFiltr.SelectedIndex == 5)
+				{
+					sagents = sagents.OrderBy(x => x.Priority).ToList();
+				}
+				else if (cbFiltr.SelectedIndex == 6)
+				{
+					sagents =sagents.OrderByDescending(x => x.Priority).ToList();
+                }
+			}
+
+			if(tbSearch.Text.Trim().Length != 0)
+			{
+				sagents = sagents.Where(x => x.Title.Contains(tbSearch.Text.Trim()) || x.Phone.Contains(tbSearch.Text.Trim()) || x.Email.Contains(tbSearch.Text.Trim())).ToList();
+			}
+
+			lvMain.ItemsSource = sagents.Skip(page * 10).Take(10);
+			SetPageNumbers();
 		}
 	}
 }

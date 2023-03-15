@@ -34,7 +34,7 @@
         <ComboBox x:Name="cbFiltr" Grid.Column="4" Margin="5" SelectionChanged="cbFiltr_SelectionChanged"/>
         <ComboBox x:Name="cbSort" Grid.Column="6" Margin="5" SelectionChanged="cbSort_SelectionChanged"/>
         <TextBox x:Name="tbSearch" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" SelectionChanged="tbSearch_SelectionChanged"/>
-        <ListView x:Name="lvMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" ItemsSource="{Binding agents}" SelectionChanged="lvMain_SelectionChanged" HorizontalContentAlignment="Stretch">
+        <ListView x:Name="lvMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="6" ItemsSource="{Binding agents}" SelectionChanged="lvMain_SelectionChanged" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid HorizontalAlignment="Stretch">
