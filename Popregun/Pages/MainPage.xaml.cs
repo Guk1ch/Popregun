@@ -51,7 +51,47 @@ namespace Popregun.Pages
             }
 			DataContext = this;
 		}
+		public void SetPageNumbers()
+		{
+			var pageCount = Math.Round((double)(sagents.Count / 10), MidpointRounding.AwayFromZero);
 
+			spPagination.Children.Clear();
+
+			spPagination.Children.Add(new TextBlock { Text = "<" });
+			for (int i = 0; i < pageCount; i++)
+			{
+				spPagination.Children.Add(new TextBlock { Text = $"{i + 1}" });
+			}
+
+			spPagination.Children.Add(new TextBlock { Text = ">" });
+
+			foreach (var child in spPagination.Children)
+			{
+				(child as UIElement).MouseDown += AgentsListPage_MouseDown;
+			}
+		}
+		private void AgentsListPage_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			var text = (sender as TextBlock).Text;
+			var pageCount = Math.Round((double)(sagents.Count / 10), MidpointRounding.AwayFromZero);
+
+			if (text == "<")
+			{
+				if (page > 0)
+					page--;
+			}
+			else if (text == ">")
+			{
+				if (page < pageCount - 1)
+					page++;
+			}
+			else
+			{
+				page = int.Parse(text) - 1;
+			}
+
+			Filter(false);
+		}
 		private void cbFiltr_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
             Filter();
@@ -69,7 +109,11 @@ namespace Popregun.Pages
 
 		private void lvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-
+			if(lvMain.SelectedItem != null)
+			{
+				var selItem = lvMain.SelectedItem as Agent;
+				NavigationService.Navigate(new AgentPage(selItem, false)); 
+			}
 		}
 		private void Filter(bool isFilterChanged = true)
 		{
@@ -119,6 +163,16 @@ namespace Popregun.Pages
 
 			lvMain.ItemsSource = sagents.Skip(page * 10).Take(10);
 			SetPageNumbers();
+		}
+
+		private void btnAddAgent_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void btnEditPriority_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }
