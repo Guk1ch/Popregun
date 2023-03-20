@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Popregun.DataBase;
+using Popregun.Windows;
 
 namespace Popregun.Pages
 {
@@ -115,6 +116,14 @@ namespace Popregun.Pages
 				NavigationService.Navigate(new AgentPage(selItem, false)); 
 			}
 		}
+		private void lvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			if (lvMain.SelectedItem != null)
+			{
+				var selItem = lvMain.SelectedItem as Agent;
+				NavigationService.Navigate(new AgentPage(selItem, false));
+			}
+		}
 		private void Filter(bool isFilterChanged = true)
 		{
 			if (isFilterChanged) { page = 0; }
@@ -167,12 +176,23 @@ namespace Popregun.Pages
 
 		private void btnAddAgent_Click(object sender, RoutedEventArgs e)
 		{
-
+			NavigationService.Navigate(new AgentPage(new Agent()));
 		}
 
 		private void btnEditPriority_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (lvMain.SelectedItems.Count != 0)
+			{
+				var editAgentPriority = lvMain.SelectedItems.Cast<Agent>().ToList();
+				if ((new EditPriorityWindow(editAgentPriority).ShowDialog()).Value == true)
+				{
+					lvMain.ItemsSource = BdConnection.connection.Agent.ToList();
+					lvMain.Items.Refresh();
+					cbFiltr.SelectedIndex = 0;
+					cbSort.SelectedIndex = 0;
+					tbSearch.Text = "";
+				}
+			}
 		}
 	}
 }

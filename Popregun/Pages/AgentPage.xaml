@@ -9,6 +9,104 @@
       Title="AgentPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnSave"
+                Content="Сохранить"
+                Grid.Column="3"
+                Grid.Row="0"
+                Click="btnSave_Click"
+                Margin="10, 0"/>
+        <Button x:Name="btnBack"
+                Content="Назад"
+                Grid.Column="0"
+                Grid.Row="0"
+                Click="btnBack_Click"
+                Margin="10, 0"/>
+        <Button x:Name="btnDel"
+                Content="Удалить"
+                Grid.Column="1"
+                Grid.Row="0"
+                Margin="10, 0"
+                Visibility="Hidden"
+                Click="btnDel_Click"/>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Наименовнаие"/>
+            <TextBox Text="{Binding Agent.Title}"/>
+            <TextBlock Text="Тип агента"/>
+            <ComboBox ItemsSource="{Binding AgentTypes}"
+                      DisplayMemberPath="Title"
+                      SelectedItem="{Binding Agent.AgentType}"/>
+            <TextBlock Text="Адрес"/>
+            <TextBox Text="{Binding Agent.Address}"/>
+            <TextBlock Text="Инн"/>
+            <TextBox Text="{Binding Agent.INN}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="1">
+            <TextBlock Text="КПП"/>
+            <TextBox Text="{Binding Agent.KPP}"/>
+            <TextBlock Text="ФИО директора"/>
+            <TextBox Text="{Binding Agent.DirectorName}"/>
+            <TextBlock Text="Телефон"/>
+            <TextBox Text="{Binding Agent.Phone}"/>
+            <TextBlock Text="Email"/>
+            <TextBox Text="{Binding Agent.Email}"/>
+            <TextBlock Text="Приоритет"/>
+            <TextBox Text="{Binding Agent.Priority}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Image Source="{Binding Agent.LogoPhoto}"
+                   Name="imgLogo"
+                   Height="200"
+                   Width="200"
+                   Margin="20"/>
+            <Button x:Name="btnAddLogo"
+                    Content="Добавить изображение"
+                    Click="btnAddLogo_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="3"
+                    Grid.Row="1">
+            <ScrollViewer>
+                <ListView x:Name="lvSale"
+                          ItemsSource="{Binding Agent.ProductSale}"
+                          Margin="0, 30, 0, 0"
+                          MouseDoubleClick="lvSale_MouseDoubleClick">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Product.Title}"
+                                           FontSize="14"/>
+                                <TextBlock Text="{Binding ProductCount}"
+                                           FontSize="14">
+                                    <Run Text=" шт."/>
+                                </TextBlock>
+                                <TextBlock Text="{Binding SaleDate, ConverterCulture=ru, StringFormat=dd.MM.yyyy}"
+                                           FontSize="14"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            <Button x:Name="btnAdd"
+                    Content="Добавить"
+                    Click="btnAdd_Click"
+                    Margin="10"/>
+        </StackPanel>
     </Grid>
 </Page>
