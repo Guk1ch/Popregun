@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase\PartialFunction.cs" />
     <Compile Include="Windows\EditPriorityWindow.xaml.cs">
       <DependentUpon>EditPriorityWindow.xaml</DependentUpon>
     </Compile>

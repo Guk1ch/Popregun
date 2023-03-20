@@ -108,14 +108,6 @@ namespace Popregun.Pages
             Filter();
         }
 
-		private void lvMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			if(lvMain.SelectedItem != null)
-			{
-				var selItem = lvMain.SelectedItem as Agent;
-				NavigationService.Navigate(new AgentPage(selItem, false)); 
-			}
-		}
 		private void lvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			if (lvMain.SelectedItem != null)

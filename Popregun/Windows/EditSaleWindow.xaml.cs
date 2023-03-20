@@ -23,9 +23,9 @@ namespace Popregun.Windows
 	{
 		public List<Product> Products { get; set; }
 		public ProductSale ProductSale { get; set; }
-		public EditSaleWindow()
+		public EditSaleWindow(ProductSale sale)
 		{
-			InitializeComponent(ProductSale sale);
+			InitializeComponent();
 			ProductSale = sale;
 			Products = BdConnection.connection.Product.ToList();
 

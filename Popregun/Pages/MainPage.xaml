@@ -31,13 +31,18 @@
         <TextBlock Text="Фильтрация" Grid.Column="5" FontSize="20" VerticalAlignment="Center"/>
         <TextBlock Text="Сортировка" Grid.Column="3" FontSize="20" VerticalAlignment="Center"/>
         <TextBlock Text="Поиск" Grid.Column="0" FontSize="20" VerticalAlignment="Center"/>
-        <ComboBox x:Name="cbFiltr" Grid.Column="4" Margin="5" SelectionChanged="cbFiltr_SelectionChanged"/>
-        <ComboBox x:Name="cbSort" Grid.Column="6" Margin="5" SelectionChanged="cbSort_SelectionChanged"/>
+        <ComboBox SelectedIndex="0" x:Name="cbFiltr" Grid.Column="4" Margin="5" SelectionChanged="cbFiltr_SelectionChanged"/>
+        <ComboBox SelectedIndex="0" x:Name="cbSort" Grid.Column="6" Margin="5" SelectionChanged="cbSort_SelectionChanged"/>
         <TextBox x:Name="tbSearch" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" SelectionChanged="tbSearch_SelectionChanged"/>
-        <ListView x:Name="lvMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="5" ItemsSource="{Binding agents}" SelectionChanged="lvMain_SelectionChanged"  MouseDoubleClick ="lvMain_MouseDoubleClick"  HorizontalContentAlignment="Stretch">
+        
+        <ListView x:Name="lvMain" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="5" ItemsSource="{Binding agents}" 
+                  MouseDoubleClick ="lvMain_MouseDoubleClick"  
+                  HorizontalContentAlignment="Stretch"
+                  SelectionMode="Extended">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch">
+                    <Grid HorizontalAlignment="Stretch"
+                          Background="{Binding ColorAgent}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition/>
@@ -47,9 +52,9 @@
                                Width="180"
                                Grid.Column="0">
                             <Image.Source>
-                                <Binding Path="LogoPhoto">
+                                <Binding Path="Logo">
                                     <Binding.TargetNullValue>
-                                        <ImageSource>/Resources/picture.png</ImageSource>
+                                        <ImageSource>/agents/picture.png</ImageSource>
                                     </Binding.TargetNullValue>
                                 </Binding>
                             </Image.Source>

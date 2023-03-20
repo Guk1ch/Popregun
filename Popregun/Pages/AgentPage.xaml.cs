@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Popregun.DataBase;
 using System.IO;
+using System.Collections.ObjectModel;
 using Popregun.Windows;
 using Microsoft.Win32;
 
@@ -44,7 +45,7 @@ namespace Popregun.Pages
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
-                //Agent.LogoPhoto = File.ReadAllBytes(openFileDialog.FileName);
+                //Agent.Logo = File.ReadAllBytes(openFileDialog.FileName);
                 imgLogo.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
         }
